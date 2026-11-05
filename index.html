@@ -92,6 +92,7 @@
     <div class="row"><span>Total fees</span><b id="fees">£0.00</b></div>
     <div class="row"><span>Profit margin</span><b id="margin">0.00%</b></div>
     <div class="row"><span>ROI <small>(profit / product + shipping cost)</small></span><b id="roi">0.00%</b></div>
+    <div class="row"><span>Break-even price</span><b id="be">£0.00</b></div>
     <div class="profit" id="profitBox">
       <small>Net profit</small>
       <div class="big" id="profit">£0.00</div>
@@ -117,6 +118,8 @@
     $("margin").textContent = margin.toFixed(2) + "%";
 
     const outlay = num("cost") + num("ship");
+    const keep = 1 - (num("fee") + num("ad")) / 100;
+    $("be").textContent = keep > 0 ? gbp(outlay / keep) : "N/A";
     $("roi").textContent = (outlay > 0 ? (profit / outlay) * 100 : 0).toFixed(2) + "%";
 
     const cls = profit > 0 ? "pos" : profit < 0 ? "neg" : "";
